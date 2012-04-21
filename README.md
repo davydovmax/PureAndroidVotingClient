@@ -1,0 +1,4 @@
+PureAndroidVotingClient
+=======================
+
+Some home work.
