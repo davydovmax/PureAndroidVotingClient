@@ -6,4 +6,5 @@
     android:paddingTop="2dip"  
     android:paddingBottom="2dip"  
     android:paddingLeft="5dip"  
-    style="?android:attr/listSeparatorTextViewStyle" /> 
+    android:background="@drawable/header_background"
+    style="@style/listSeparatorTextViewStyle" /> 

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="violet_light">#0c3c3f</color>
+    <color name="violet_dark">#021214</color>
+    <color name="violet_very_light">#43969C</color>
+    <color name="bck_dark">#0e2626</color>
+    <color name="bck_light">#1e4c4f</color>
+    <color name="selection">#16C8DB</color>
+
+</resources>

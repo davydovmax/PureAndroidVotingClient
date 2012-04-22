@@ -6,23 +6,26 @@
 	android:orientation="horizontal">
 
     <LinearLayout android:layout_height="fill_parent"
-              android:layout_width="fill_parent"
-              android:layout_weight="1"
-              android:orientation="vertical">
+	    android:layout_width="fill_parent"
+	    android:layout_weight="1"
+	    android:orientation="vertical"
+		android:paddingBottom="8dp">
               
         <TextView android:id="@+id/txtVoteTitle"
                  android:layout_height="wrap_content"
                  android:layout_width="wrap_content"
                  android:layout_weight="1"
                  android:textStyle="bold"
-                 android:textSize="14sp" />
+                 android:paddingLeft="4dp"
+                 android:textSize="16sp" />
 
         <TextView android:id="@+id/txtVoteDetail"
                   android:layout_height="wrap_content"
                   android:layout_width="wrap_content"
                   android:layout_weight="1"
-                  android:textSize="10sp"
+                  android:textSize="12sp"
                   android:ellipsize="end"
+                  android:paddingLeft="4dp"
                   android:maxLines="2" />
 
     </LinearLayout>

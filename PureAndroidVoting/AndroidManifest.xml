@@ -24,6 +24,11 @@
         <activity android:name=".activities.RegisterActivity" android:label="Registration"></activity>
         <activity android:name=".activities.ManageVotes"></activity>
         <activity android:name=".activities.ManageServerActivity"></activity>
+        <activity android:name=".activities.MyVotesActivity"></activity>
+        <activity android:name=".activities.PendingVotesActivity"></activity>
+        <activity android:name=".activities.PublicVotesActivity"></activity>
+        <activity android:name=".activities.ManageVoteActivity"></activity>
+        <activity android:name=".activities.PerformVoteActivity"></activity>
     </application>
 
 </manifest>

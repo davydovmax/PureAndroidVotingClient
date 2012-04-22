@@ -4,5 +4,7 @@
 	android:layout_width="wrap_content"
 	android:layout_weight="1"
 	android:textStyle="bold"
-	android:textSize="14sp"
-	android:paddingBottom="6dip" />
+	android:textSize="14dp"
+	android:paddingTop="12dp"
+	android:paddingBottom="24dp"
+	android:gravity="top|center_horizontal" />

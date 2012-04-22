@@ -16,9 +16,10 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:text="Please Register To Start Using This Wonderfull Software"
-	        android:textAppearance="?android:attr/textAppearanceSmall"
+	        android:textAppearance="?android:attr/textAppearanceMedium"
 	        android:layout_marginBottom="12dp"
-	        android:gravity="center_vertical" />
+	        android:gravity="center_vertical"
+	        android:textStyle="italic|bold" />
         
 	    <TextView
 	        android:id="@+id/textView1"
@@ -61,13 +62,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.00"
-        android:gravity="right" >
+        android:gravity="center" >
         
 	    <Button
 			android:id="@+id/btnRegister"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_weight="0.01"
+			android:layout_weight="1"
 			android:enabled="false"
 			android:text="Register"
 			android:onClick="onRegisterClicked" />
@@ -76,7 +77,7 @@
 	        android:id="@+id/btnCancell"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:layout_weight="0.01"
+	        android:layout_weight="1"
 	        android:text="Cancel"
 	        android:onClick="onCancelClicked" />
 

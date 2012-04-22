@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<style
+	    name="listSeparatorTextViewStyle">
+	    <item name="android:layout_height">wrap_content</item>
+	    <item name="android:layout_width">fill_parent</item>
+	    <item name="android:paddingTop">2dip</item>
+	    <item name="android:paddingBottom">3dip</item>
+	    <item name="android:paddingLeft">5dip</item>
+	    <item name="android:textAppearance">@android:style/TextAppearance.Large</item>
+	    <item name="android:shadowColor">#111111</item>
+	    <item name="android:shadowRadius">1</item>
+	    <item name="android:shadowDy">1</item>
+	    <item name="android:textStyle">bold</item>
+	    <item name="android:textColor">@android:color/white</item>
+	    <item name="android:gravity">center_horizontal|center_vertical</item>
+ 	</style>
+</resources>

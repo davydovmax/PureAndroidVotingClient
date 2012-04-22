@@ -9,7 +9,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -33,6 +36,10 @@ public class HomeActivity extends Activity {
 	private SharedPreferenceManager preferences;
 	private ListView lstCategories;
 
+	private final int mMyVotesIndex = 0;
+	private int mPendingVotesIndex = -1;
+	private int mPublicVotesIndex = -1;
+
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -50,6 +57,68 @@ public class HomeActivity extends Activity {
 		if (this.preferences.isFirstStart()) {
 			this.preferences.setNotFirstStart();
 		}
+
+		// list click handler
+		final HomeActivity homeActivity = this;
+		this.lstCategories.setOnItemClickListener(new OnItemClickListener() {
+			public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+				IListItem item = (IListItem) parent.getItemAtPosition(position);
+				homeActivity.OnListItemClick(position, item);
+			}
+		});
+	}
+
+	private void OnListItemClick(int position, IListItem item) {
+		// section clicked, try open respective activity
+		if (item instanceof SectionListItem) {
+			// My Votes section clicked, opening MyVotesActivity
+			if (position == this.mMyVotesIndex) {
+				this.openActivity(MyVotesActivity.class);
+				return;
+			}
+
+			// other sections clicked, open if there are votes
+			EmptyListItem nextItem = (EmptyListItem) this.lstCategories.getItemAtPosition(position + 1);
+			if (!(nextItem instanceof EmptyListItem)) {
+				if (position == this.mPendingVotesIndex) {
+					this.openActivity(PendingVotesActivity.class);
+					return;
+				} else if (position == this.mPublicVotesIndex) {
+					this.openActivity(PublicVotesActivity.class);
+					return;
+				}
+			}
+
+			// no Votes, nothing to open
+			Toast.makeText(HomeActivity.this, "Thera are no Votes to show  :(", Toast.LENGTH_SHORT).show();
+		}
+		// empty list item clicked
+		else if (item instanceof EmptyListItem) {
+			// try open activity for new Vote
+			if (position == this.mMyVotesIndex + 1) {
+				this.openActivity(ManageVoteActivity.class);
+			} else {
+				// no votes, nothing to open
+				Toast.makeText(HomeActivity.this, "Thera are no Votes to show  :(", Toast.LENGTH_SHORT).show();
+			}
+		}
+		// Vote item clicked
+		else {
+			if (position < this.mPendingVotesIndex) {
+				// TODO: pass vote ID
+				// manage my Vote
+				this.openActivity(ManageVoteActivity.class);
+			} else {
+				// TODO: pass vote ID
+				// perform Vote
+				this.openActivity(PerformVoteActivity.class);
+			}
+		}
+	}
+
+	private void openActivity(Class<?> cls) {
+		Intent intent = new Intent(HomeActivity.this, cls);
+		startActivity(intent);
 	}
 
 	@Override
@@ -118,13 +187,25 @@ public class HomeActivity extends Activity {
 	}
 
 	private ArrayList<IListItem> loadVotesSync() {
-		ArrayList<Vote> votes = null;
 
+		ArrayList<IListItem> items = new ArrayList<IListItem>();
+		items.add(new SectionListItem("My Votes"));
+
+		// load my votes
 		try {
-			votes = this.server.getMyVotes();
+			ArrayList<Vote> votes = this.server.getMyVotes();
+
+			if (votes.size() == 0) {
+				items.add(new EmptyListItem("You have no own votes, but you can create one. Just press this item."));
+			} else {
+				// add top 5 votes
+				for (int i = 0; i < 5 && i < votes.size(); ++i) {
+					items.add(new VoteListItem(votes.get(i)));
+				}
+			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			// something went wrong on server
+			return null;
 		}
 
 		// TODO: remove
@@ -132,24 +213,14 @@ public class HomeActivity extends Activity {
 		// R.layout.vote_list_item, votes);
 		// this.lstCategories.setAdapter(adapter);
 
-		ArrayList<IListItem> items = new ArrayList<IListItem>();
-
-		// my votes
-		items.add(new SectionListItem("My Votes"));
-		if (votes.size() == 0) {
-			items.add(new EmptyListItem("You have no own votes, but you can create one. Just press this item."));
-		} else {
-			for (int i = 0; i < 5 && i < votes.size(); ++i) {
-				items.add(new VoteListItem(votes.get(i)));
-			}
-		}
-
 		// pending votes
 		items.add(new SectionListItem("Pending Votes"));
+		this.mPendingVotesIndex = items.size() - 1;
 		items.add(new EmptyListItem("No pending votes or invitations."));
 
 		// top public votes
 		items.add(new SectionListItem("Top Votes"));
+		this.mPublicVotesIndex = items.size() - 1;
 		items.add(new EmptyListItem("No available public votes."));
 
 		return items;
@@ -158,8 +229,7 @@ public class HomeActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.manage_server:
-			Intent intent = new Intent(HomeActivity.this, ManageServerActivity.class);
-			startActivity(intent);
+			this.openActivity(ManageServerActivity.class);
 			return true;
 
 		case R.id.reset_app:
