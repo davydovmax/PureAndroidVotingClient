@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="right"
+    android:orientation="vertical" 
+    android:background="@drawable/radialback" >
+
+    <ListView
+        android:id="@+id/lstCategories"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.01"
+        android:cacheColorHint="#00000000" >
+    </ListView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.00"
+        android:gravity="right" >
+
+        <Button
+            android:id="@+id/btnReset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reset Application"
+            android:onClick="onResetClicked" />
+        
+        <Button
+            android:id="@+id/btnManageServer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Manage Server"
+            android:onClick="onManageServerClicked" />
+        
+    </LinearLayout>
+
+</LinearLayout>
