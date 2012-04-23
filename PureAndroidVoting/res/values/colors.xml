@@ -7,5 +7,6 @@
     <color name="bck_dark">#0e2626</color>
     <color name="bck_light">#1e4c4f</color>
     <color name="selection">#16C8DB</color>
+    <color name="white_alpha">#00FFFFFF</color>
 
 </resources>
