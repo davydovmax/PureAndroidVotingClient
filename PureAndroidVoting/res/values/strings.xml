@@ -3,5 +3,22 @@
 
     <string name="hello">Hello World, HomeActivity!</string>
     <string name="app_name">PureAndroidVoting</string>
+    <string name="refuse">Refuse</string>
+    <string name="accept">Accept</string>
+    <string name="dates_are_not_set_yet">(dates are not set yet)</string>
+    <string name="vote_dates">Vote Dates...</string>
+    <string name="_no_vote_options_yet_">(no vote options yet)</string>
+    <string name="no_vote_options_yet">(no vote options yet)</string>
+    <string name="vote_options">Vote Options...</string>
+    <string name="multichoice">Multichoice</string>
+    <string name="single">Single</string>
+    <string name="single_or_multichoice">Single or Multichoice?</string>
+    <string name="private_string">Private</string>
+    <string name="public_string">Public</string>
+    <string name="public_or_private">Public or Private?</string>
+    <string name="detailed_description_of_vote">Detailed description of vote</string>
+    <string name="description">Description:</string>
+    <string name="short_vote_title">Short Vote Title</string>
+    <string name="title">Title:</string>
 
 </resources>
