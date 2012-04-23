@@ -6,14 +6,16 @@
     android:background="@drawable/radialback"
     android:fillViewport="true" >
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical" >
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="fill_parent"
+            android:id="@+id/layout_votes_content"
+			android:layout_alignParentTop="true"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
             android:layout_weight="0.1"
             android:orientation="vertical"
             android:paddingLeft="6dp"
@@ -23,14 +25,14 @@
                 android:id="@+id/textView1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Title:"
+                android:text="@string/title"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <EditText
                 android:id="@+id/editText1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Short Vote Title"
+                android:hint="@string/short_vote_title"
                 android:singleLine="true" />
 
             <TextView
@@ -38,7 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Description:"
+                android:text="@string/description"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <EditText
@@ -46,17 +48,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="top"
-                android:hint="Detailed description of vote"
+                android:hint="@string/detailed_description_of_vote"
                 android:inputType="textMultiLine"
                 android:lines="2" />
 
             <TextView
                 android:id="@+id/textView3"
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Public or Private?"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:text="@string/public_or_private"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                />
 
             <RadioGroup
                 android:layout_width="match_parent"
@@ -71,23 +74,29 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="true"
-                    android:text="Public" />
+                    android:text="@string/public_string" />
 
                 <RadioButton
                     android:id="@+id/radioButton2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Private" />
+                    android:text="@string/private_string" />
             </RadioGroup>
+            
+            <View 
+                android:background="@drawable/separator_gradient"
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"/>   
 
             <TextView
                 android:id="@+id/textView4"
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Single or Multichoice?"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:text="@string/single_or_multichoice"
+                android:textAppearance="?android:attr/textAppearanceMedium" 
+                />
 
             <RadioGroup
                 android:layout_width="match_parent"
@@ -102,69 +111,107 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="true"
-                    android:text="Single" />
+                    android:text="@string/single" />
 
                 <RadioButton
                     android:id="@+id/RadioButton01"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Multichoice" />
+                    android:text="@string/multichoice" />
             </RadioGroup>
+            
+            <View 
+                android:background="@drawable/separator_gradient"
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"/>   
 
             <TextView
                 android:id="@+id/textView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Vote Options..."
+                android:text="@string/vote_options"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
                 android:id="@+id/textView6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="(no vote options yet)"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
+                android:text="@string/no_vote_options_yet"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:paddingBottom="5dip" />
 
-            <TextView
-                android:id="@+id/textView7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Vote Dates..."
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <include
+            <View 
+                android:background="@drawable/separator_gradient"
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"/>   
+            
+            <!-- <include
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 layout="@layout/details_button" />
-
-            <TextView
-                android:id="@+id/textView8"
-                android:layout_width="wrap_content"
+                --> 
+                
+            <RelativeLayout 
                 android:layout_height="wrap_content"
-                android:text="(dates are not set yet)"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
+                android:layout_width="fill_parent">
+                
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:text="@string/vote_dates"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/textView7"
+                    android:text="@string/dates_are_not_set_yet"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+                
+                <ImageView 
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/balloon_overlay_close"
+                    android:layout_centerVertical="true"
+                    android:paddingRight="3dip"/>
+                
+            </RelativeLayout>    
+            
+            
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@id/layout_votes_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="horizontal" >
+            android:orientation="horizontal"
+			android:padding="7dip">
 
             <Button
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
-                android:layout_weight="1.0"
-                android:text="Accept" />
+                android:layout_weight="1"
+                android:text="@string/accept" 
+                android:textColor="@android:color/white"
+                android:background="@drawable/selector_green_btn"
+                android:layout_marginRight="7dip"/>
 
             <Button
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
-                android:layout_weight="1.0"
-                android:text="Refuse" />
+                android:layout_weight="1"
+                android:text="@string/refuse"
+                android:background="@drawable/selector_green_btn"
+                android:textColor="@android:color/white" />
         </LinearLayout>
-    </LinearLayout>
+    </RelativeLayout>
 
 </ScrollView>
