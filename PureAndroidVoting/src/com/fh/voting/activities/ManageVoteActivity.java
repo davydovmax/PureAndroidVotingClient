@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.view.Window;
+import android.widget.TextView;
 
 import com.fh.voting.R;
 import com.fh.voting.Server;
@@ -17,7 +18,14 @@ public class ManageVoteActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		//customize title
+		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
 		setContentView(R.layout.manage_vote);
+	    getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.title);
+	    TextView titleText = (TextView)findViewById(R.id.title_text);
+        titleText.setText(R.string.app_name);
+
 
 		Window window = getWindow();
 		window.setFormat(PixelFormat.RGBA_8888);

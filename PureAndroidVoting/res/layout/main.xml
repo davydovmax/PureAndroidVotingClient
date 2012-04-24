@@ -11,6 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="0.01"
-        android:cacheColorHint="#00000000">
+        android:cacheColorHint="#00000000"
+        android:dividerHeight="1dip"
+        android:divider="@drawable/separator_gradient">
     </ListView>
 </LinearLayout>

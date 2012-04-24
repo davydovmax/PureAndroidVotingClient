@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:background="@drawable/radialback" >
+    android:background="@drawable/radialback"
+    android:padding="7dip" >
 
    	<LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical" 
-        android:layout_weight="0.01">
+        android:layout_alignParentTop="true"
+        android:background="@drawable/transparent_bg">
         
         <TextView
-	        android:id="@+id/textView1"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:text="Please Register To Start Using This Wonderfull Software"
+	        android:text="@string/please_register_to_start"
 	        android:textAppearance="?android:attr/textAppearanceMedium"
 	        android:layout_marginBottom="12dp"
 	        android:gravity="center_vertical"
@@ -25,35 +26,35 @@
 	        android:id="@+id/textView1"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:text="Full Name:"
+	        android:text="@string/full_name"
 	        android:textAppearance="?android:attr/textAppearanceMedium" />
 	
 	    <EditText 
 	        android:id="@+id/txtName"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:hint="Your full name"
+			android:hint="@string/your_full_name"
 			android:singleLine="true" />
 	    
 	    <TextView
 	        android:id="@+id/textView2"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:text="Email address:"
+	        android:text="@string/email_address"
 	        android:textAppearance="?android:attr/textAppearanceMedium" />
 	
 	    <EditText 
 	        android:id="@+id/txtEmail"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:hint="Your email address"
+			android:hint="@string/your_email_address"
 			android:inputType="textEmailAddress" />
 	
 	    <CheckBox
 	        android:id="@+id/chbAgreed"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:text="Yes, I agree with EVERYTHING!" 
+	        android:text="@string/yes_i_agree" 
 	        android:onClick="onCheckboxAgreedClicked" />
 	    
 	</LinearLayout>
@@ -62,7 +63,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.00"
-        android:gravity="center" >
+        android:gravity="center"
+        android:layout_alignParentBottom="true" >
         
 	    <Button
 			android:id="@+id/btnRegister"
@@ -70,17 +72,22 @@
 			android:layout_height="wrap_content"
 			android:layout_weight="1"
 			android:enabled="false"
-			android:text="Register"
-			android:onClick="onRegisterClicked" />
+			android:text="@string/register"
+			android:onClick="onRegisterClicked"
+			android:background="@drawable/selector_green_btn" 
+			android:layout_marginRight="7dip"
+			android:textColor="@android:color/white"/>
 	    
 	     <Button
 	        android:id="@+id/btnCancell"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_weight="1"
-	        android:text="Cancel"
-	        android:onClick="onCancelClicked" />
+	        android:text="@string/cancel"
+	        android:onClick="onCancelClicked" 
+	        android:background="@drawable/selector_green_btn"
+	        android:textColor="@android:color/white" />
 
 	</LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>
