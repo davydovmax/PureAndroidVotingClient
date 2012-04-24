@@ -20,5 +20,13 @@
     <string name="description">Description:</string>
     <string name="short_vote_title">Short Vote Title</string>
     <string name="title">Title:</string>
+    <string name="please_register_to_start">Please Register To Start Using This Wonderfull Software</string>
+    <string name="full_name">Full Name:</string>
+    <string name="your_full_name">Your full name</string>
+    <string name="email_address">Email address:</string>
+    <string name="your_email_address">Your email address</string>
+    <string name="yes_i_agree">Yes, I agree with EVERYTHING!</string>
+    <string name="register">Register</string>
+    <string name="cancel">Cancel</string>
 
 </resources>
