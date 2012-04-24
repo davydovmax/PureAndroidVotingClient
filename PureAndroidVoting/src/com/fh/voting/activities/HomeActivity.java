@@ -14,6 +14,7 @@ import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fh.voting.R;
@@ -44,7 +45,14 @@ public class HomeActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.main);
+		
+		//customize title
+		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
+	    setContentView(R.layout.main);
+	    getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.title);
+	    TextView titleText = (TextView)findViewById(R.id.title_text);
+        titleText.setText(R.string.app_name);
+	    
 
 		Window window = getWindow();
 		window.setFormat(PixelFormat.RGBA_8888);

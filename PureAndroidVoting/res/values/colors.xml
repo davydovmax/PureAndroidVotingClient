@@ -6,6 +6,7 @@
     <color name="violet_very_light">#43969C</color>
     <color name="bck_dark">#0e2626</color>
     <color name="bck_light">#1e4c4f</color>
+    <color name="trans_bck">#50021214</color>
     <color name="selection">#16C8DB</color>
     <color name="white_alpha">#00FFFFFF</color>
 
