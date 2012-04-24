@@ -12,6 +12,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class RegisterActivity extends Activity {
@@ -26,7 +27,13 @@ public class RegisterActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
+	    
+	    //customize title
+		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
 	    setContentView(R.layout.register);
+	    getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.title);
+	    TextView titleText = (TextView)findViewById(R.id.title_text);
+        titleText.setText(R.string.registration);
 	    
 	    Window window = getWindow();
 		window.setFormat(PixelFormat.RGBA_8888);

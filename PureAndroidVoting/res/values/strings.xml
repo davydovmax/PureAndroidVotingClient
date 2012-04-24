@@ -28,5 +28,6 @@
     <string name="yes_i_agree">Yes, I agree with EVERYTHING!</string>
     <string name="register">Register</string>
     <string name="cancel">Cancel</string>
+    <string name="registration">Registration</string>
 
 </resources>

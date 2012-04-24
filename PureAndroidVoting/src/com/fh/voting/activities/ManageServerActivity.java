@@ -9,8 +9,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.fh.voting.R;
 import com.fh.voting.VoteDebug;
@@ -26,7 +28,13 @@ public class ManageServerActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		//customize title
+		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
 		setContentView(R.layout.manage_server);
+	    getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.title);
+	    TextView titleText = (TextView)findViewById(R.id.title_text);
+        titleText.setText(R.string.app_name);
 
 		this.voteDebug = new VoteDebug(this);
 		this.lstLogs = (ListView) this.findViewById(R.id.lstLogs);
