@@ -23,8 +23,6 @@ public class Vote extends DataTransferObject {
 
 	private boolean isMultipleChoice;
 
-	private Date publicationDate;
-
 	private Date startDate;
 
 	private Date endDate;
@@ -39,11 +37,7 @@ public class Vote extends DataTransferObject {
 
 		Calendar c = new GregorianCalendar();
 
-		// publish tomorrow
-		c.add(Calendar.DAY_OF_MONTH, 1);
-		publicationDate = c.getTime();
-
-		// start next day after publish
+		// start on next day
 		c.add(Calendar.DAY_OF_MONTH, 1);
 		startDate = c.getTime();
 
@@ -90,14 +84,6 @@ public class Vote extends DataTransferObject {
 
 	public void setIsMultipleChoice(boolean isMultipleChoice) {
 		this.isMultipleChoice = isMultipleChoice;
-	}
-
-	public Date getPublicationDate() {
-		return this.publicationDate;
-	}
-
-	public void setPublicationDate(Date publicationDate) {
-		this.publicationDate = publicationDate;
 	}
 
 	public Date getStartDate() {

@@ -127,7 +127,7 @@ public class DatabaseHelper {
 
 	public DataTransferObject getById(Class cls, int id) {
 		ObjectSet<DataTransferObject> items = db().query(cls);
-		if (items.hasNext()) {
+		while (items.hasNext()) {
 			DataTransferObject obj = items.next();
 			if (obj.getId() == id) {
 				return obj;

@@ -5,8 +5,9 @@
     <string name="app_name">Pure Android Voting</string>
     <string name="refuse">Refuse</string>
     <string name="accept">Accept</string>
-    <string name="dates_are_not_set_yet">(dates are not set yet)</string>
+    <string name="no_invitations_yet">(no users invited so far…)</string>
     <string name="vote_dates">Vote Dates…</string>
+    <string name="invited_users">Invited users:</string>
     <string name="_no_vote_options_yet_">(no vote options yet)</string>
     <string name="no_vote_options_yet">(no vote options yet)</string>
     <string name="vote_options">Vote Options…</string>
@@ -33,5 +34,9 @@
     <string name="create">Create</string>
     <string name="manage_vote">Manage Vote</string>
     <string name="my_votes">My Votes</string>
+    <string name="start_date">Start Date:</string>
+    <string name="vote_duration_setting">Vote duration, hours:</string>
+    <string name="_empty_">_empty_</string>
+    <string name="duration_initial_value">0 h</string>
 
 </resources>

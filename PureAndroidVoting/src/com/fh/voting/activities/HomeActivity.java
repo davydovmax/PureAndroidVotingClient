@@ -67,6 +67,9 @@ public class HomeActivity extends DatabaseWrapperActivity {
 			}
 		});
 
+		// reset cache!!!
+		this.modelManager.resetCahce();
+
 		// check registration and register if needed
 		// will trigger registration activity
 		if (this.isRegistrationRequired()) {
@@ -77,8 +80,8 @@ public class HomeActivity extends DatabaseWrapperActivity {
 			this.preferences.setNotFirstStart();
 		}
 
-		// reset cache!!! and load votes from web service
-		this.modelManager.resetCahce();
+		// load votes from web service
+		// TODO: refactor
 		this.loadVotesAsync();
 	}
 

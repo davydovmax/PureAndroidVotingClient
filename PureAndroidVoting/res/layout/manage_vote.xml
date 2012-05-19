@@ -136,108 +136,128 @@
                 android:layout_height="1dip"
                 android:background="@drawable/separator_gradient" />
 
-            <RelativeLayout
+            <TextView
+                android:id="@+id/textView13"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dip"
-                android:layout_marginTop="5dip" >
+                android:layout_marginTop="5dip"
+                android:text="@string/start_date"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
-                <TextView
-                    android:id="@+id/textView7"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <Button
+                    android:id="@+id/btnDatePicker"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/_empty_" />
+
+                <Button
+                    android:id="@+id/btnTimePicker"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:text="@string/vote_dates"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                <TextView
-                    android:id="@+id/textView8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/textView7"
-                    android:text="@string/dates_are_not_set_yet"
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:paddingRight="3dip"
-                    android:src="@drawable/balloon_overlay_close" />
-            </RelativeLayout>
+                    android:text="@string/_empty_" />
+            </LinearLayout>
 
             <View
                 android:layout_width="fill_parent"
                 android:layout_height="1dip"
+                android:layout_marginTop="5dip"
                 android:background="@drawable/separator_gradient" />
 
-            <RelativeLayout
+            <TextView
+                android:id="@+id/textView14"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dip"
-                android:layout_marginTop="5dip" >
+                android:layout_marginTop="5dip"
+                android:text="@string/vote_duration_setting"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <SeekBar
+                    android:id="@+id/seekVoteDuration"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:max="71"
+                    android:paddingLeft="5dip"
+                    android:paddingRight="4dip" />
 
                 <TextView
-                    android:id="@+id/textView9"
+                    android:id="@+id/txtVoteDuration"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:text="@string/vote_dates"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                    android:gravity="right"
+                    android:minWidth="50dip"
+                    android:text="@string/duration_initial_value"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+            </LinearLayout>
 
-                <TextView
-                    android:id="@+id/textView10"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/textView9"
-                    android:text="@string/dates_are_not_set_yet"
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
 
-                <ImageView
-                    android:layout_width="wrap_content"
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dip"
+                    android:layout_marginTop="5dip"
+                    android:background="@drawable/separator_gradient" />
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:paddingRight="3dip"
-                    android:src="@drawable/balloon_overlay_close" />
-            </RelativeLayout>
+                    android:layout_marginBottom="5dip"
+                    android:layout_marginTop="5dip" >
+
+                    <TextView
+                        android:id="@+id/textView11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:text="@string/invited_users"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <TextView
+                        android:id="@+id/textView12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/textView11"
+                        android:text="@string/no_invitations_yet"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                    <ImageView
+                        android:id="@+id/imageView1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:contentDescription="@string/_empty_"
+                        android:paddingRight="3dip"
+                        android:src="@drawable/balloon_overlay_close" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignTop="@+id/imageView1"
+                        android:layout_marginLeft="37dp"
+                        android:orientation="vertical" >
+                    </LinearLayout>
+                </RelativeLayout>
+            </LinearLayout>
 
             <View
                 android:layout_width="fill_parent"
                 android:layout_height="1dip"
+                android:layout_marginTop="5dip"
                 android:background="@drawable/separator_gradient" />
-
-            <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dip"
-                android:layout_marginTop="5dip" >
-
-                <TextView
-                    android:id="@+id/textView11"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:text="@string/vote_dates"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                <TextView
-                    android:id="@+id/textView12"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/textView11"
-                    android:text="@string/dates_are_not_set_yet"
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:paddingRight="3dip"
-                    android:src="@drawable/balloon_overlay_close" />
-            </RelativeLayout>
         </LinearLayout>
 
         <LinearLayout

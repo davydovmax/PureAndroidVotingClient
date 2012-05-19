@@ -105,10 +105,10 @@ public class ModelManager {
 		return (Vote) this.m_dbHelper.getById(Vote.class, voteId);
 	}
 
-	public Vote createVote(String title, String text, boolean isPrivate, boolean isMultiChoice, Date publicationDate,
-			Date startDate, Date endDate) throws Exception {
+	public Vote createVote(String title, String text, boolean isPrivate, boolean isMultiChoice, Date startDate,
+			Date endDate) throws Exception {
 		Vote vote = this.m_server.createVote(title, text, this.getMyUser().getId(), isPrivate, isMultiChoice,
-				publicationDate, startDate, endDate);
+				startDate, endDate);
 
 		// store to DB
 		this.m_dbHelper.syncItem(vote);

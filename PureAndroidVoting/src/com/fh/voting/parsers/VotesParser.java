@@ -36,7 +36,6 @@ public class VotesParser {
 		vote.setText(voteObject.getString("text"));
 		vote.setIsPrivate(voteObject.getBoolean("is_private"));
 		vote.setIsMultipleChoice(voteObject.getBoolean("is_multiple_choice"));
-		vote.setPublicationDate(DateTimeConverter.parse(voteObject.getString("publication_date")));
 		vote.setStartDate(DateTimeConverter.parse(voteObject.getString("start_date")));
 		vote.setEndDate(DateTimeConverter.parse(voteObject.getString("end_date")));
 		return vote;

@@ -134,11 +134,9 @@ public class Server {
 	}
 
 	public Vote createVote(String title, String text, int authorId, boolean isPrivate, boolean isMultiChoice,
-			Date publicationDate, Date startDate, Date endDate) throws Exception {
-		String requestString = String.format(
-				"%s/%s/my?title=%s&text=%s&publication_date=%s&start_date=%s&end_date=%s&", this.server, this.phoneId,
-				URLEncoder.encode(title), URLEncoder.encode(text),
-				URLEncoder.encode(DateTimeConverter.toString(publicationDate)),
+			Date startDate, Date endDate) throws Exception {
+		String requestString = String.format("%s/%s/my?title=%s&text=%s&start_date=%s&end_date=%s&", this.server,
+				this.phoneId, URLEncoder.encode(title), URLEncoder.encode(text),
 				URLEncoder.encode(DateTimeConverter.toString(startDate)),
 				URLEncoder.encode(DateTimeConverter.toString(endDate)));
 		String response = this.performPUT(requestString);
