@@ -5,10 +5,22 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class DateTimeConverter {
-	static private String format = "yyyy-MM-dd'T'HH:mm:ss.SSS";
-	
-	static public Date Parse(String isoDateTime) throws ParseException {
+	static private final String format = "yyyy-MM-dd'T'HH:mm:ss.SSS";
+	static private final int length = 23;
+	static private final int lengthShort = 19;
+
+	static public Date parse(String isoDateTime) throws ParseException {
 		SimpleDateFormat sdf = new SimpleDateFormat(format);
-		return sdf.parse(isoDateTime.substring(0, isoDateTime.length() - 3));
+		if (isoDateTime.length() > length) {
+			isoDateTime = isoDateTime.substring(0, length);
+		} else if (isoDateTime.length() == lengthShort) {
+			isoDateTime = isoDateTime.concat(".000");
+		}
+		return sdf.parse(isoDateTime);
+	}
+
+	static public String toString(Date dateTime) {
+		SimpleDateFormat sdf = new SimpleDateFormat(format);
+		return sdf.format(dateTime);
 	}
 }

@@ -1,8 +1,8 @@
 package com.fh.voting.activities;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
@@ -17,9 +17,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.fh.voting.Constants;
 import com.fh.voting.R;
-import com.fh.voting.Server;
-import com.fh.voting.SharedPreferenceManager;
 import com.fh.voting.VoteDebug;
 import com.fh.voting.async.AsyncTaskManager;
 import com.fh.voting.async.ITask;
@@ -31,40 +30,33 @@ import com.fh.voting.lists.SectionListItem;
 import com.fh.voting.lists.VoteListItem;
 import com.fh.voting.model.Vote;
 
-public class HomeActivity extends Activity {
+public class HomeActivity extends DatabaseWrapperActivity {
 	private VoteDebug voteDebug;
-	private Server server;
-	private SharedPreferenceManager preferences;
 	private ListView lstCategories;
 
 	private final int mMyVotesIndex = 0;
 	private int mPendingVotesIndex = -1;
 	private int mPublicVotesIndex = -1;
 
+	private boolean _isLoading = false;
+
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
-		//customize title
+
+		// customize title
 		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
-	    setContentView(R.layout.main);
-	    getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.title);
-	    TextView titleText = (TextView)findViewById(R.id.title_text);
-        titleText.setText(R.string.app_name);
-	    
+		setContentView(R.layout.main);
+		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.title);
+		TextView titleText = (TextView) findViewById(R.id.title_text);
+		titleText.setText(R.string.app_name);
 
 		Window window = getWindow();
 		window.setFormat(PixelFormat.RGBA_8888);
 
 		this.voteDebug = new VoteDebug(this);
-		this.preferences = new SharedPreferenceManager(this);
-		this.server = new Server(preferences.getPhoneId());
 		this.lstCategories = (ListView) this.findViewById(R.id.lstCategories);
-
-		if (this.preferences.isFirstStart()) {
-			this.preferences.setNotFirstStart();
-		}
 
 		// list click handler
 		final HomeActivity homeActivity = this;
@@ -74,6 +66,20 @@ public class HomeActivity extends Activity {
 				homeActivity.OnListItemClick(position, item);
 			}
 		});
+
+		// check registration and register if needed
+		// will trigger registration activity
+		if (this.isRegistrationRequired()) {
+			return;
+		}
+
+		if (this.preferences.isFirstStart()) {
+			this.preferences.setNotFirstStart();
+		}
+
+		// reset cache!!! and load votes from web service
+		this.modelManager.resetCahce();
+		this.loadVotesAsync();
 	}
 
 	private void OnListItemClick(int position, IListItem item) {
@@ -112,20 +118,30 @@ public class HomeActivity extends Activity {
 		}
 		// Vote item clicked
 		else {
+			VoteListItem voteItem = (VoteListItem) item;
+			Bundle bundle = new Bundle();
+			bundle.putInt(Constants.bundle_vote_id, voteItem.getVote().getId());
+
 			if (position < this.mPendingVotesIndex) {
 				// TODO: pass vote ID
 				// manage my Vote
-				this.openActivity(ManageVoteActivity.class);
+				this.openActivity(ManageVoteActivity.class, bundle);
 			} else {
 				// TODO: pass vote ID
 				// perform Vote
-				this.openActivity(PerformVoteActivity.class);
+				this.openActivity(PerformVoteActivity.class, bundle);
 			}
 		}
 	}
 
 	private void openActivity(Class<?> cls) {
 		Intent intent = new Intent(HomeActivity.this, cls);
+		startActivity(intent);
+	}
+
+	private void openActivity(Class<?> cls, Bundle bundle) {
+		Intent intent = new Intent(HomeActivity.this, cls);
+		intent.putExtras(bundle);
 		startActivity(intent);
 	}
 
@@ -140,14 +156,10 @@ public class HomeActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		// check registration and register if needed
-		// will trigger registration activity
-		if (this.isRegistrationRequired()) {
-			return;
-		}
 
-		// load votes from web service
-		this.loadVotesAsync();
+		if (!this._isLoading) {
+			this.onLoadVotes();
+		}
 	};
 
 	private boolean isRegistrationRequired() {
@@ -171,67 +183,96 @@ public class HomeActivity extends Activity {
 	}
 
 	private void loadVotesAsync() {
+		this._isLoading = true;
 		final HomeActivity homeActivity = this;
 		ITask loader = new ITask() {
 			@Override
 			public Object onWorkCallback(TaskExecutor executor, Object... params) {
-				return homeActivity.loadVotesSync();
+				homeActivity.loadVotesSync();
+				return null;
 			}
 
 			@SuppressWarnings("unchecked")
 			@Override
 			public void onCompleteCallback(Object result) {
-				homeActivity.onLoadVotes((ArrayList<IListItem>) result);
+				homeActivity.onLoadVotes();
 			}
 		};
 
 		new AsyncTaskManager(this).execute("Loading info from server...", loader);
 	}
 
-	private void onLoadVotes(ArrayList<IListItem> votes) {
-		SectionListAdapter adapter = new SectionListAdapter(this, R.layout.header_list_item, R.layout.empty_list_item,
-				R.layout.vote_list_item, votes);
-		this.lstCategories.setAdapter(adapter);
-	}
-
-	private ArrayList<IListItem> loadVotesSync() {
-
+	private void onLoadVotes() {
+		// result list
 		ArrayList<IListItem> items = new ArrayList<IListItem>();
-		items.add(new SectionListItem("My Votes"));
 
 		// load my votes
-		try {
-			ArrayList<Vote> votes = this.server.getMyVotes();
-
-			if (votes.size() == 0) {
-				items.add(new EmptyListItem("You have no own votes, but you can create one. Just press this item."));
-			} else {
-				// add top 5 votes
-				for (int i = 0; i < 5 && i < votes.size(); ++i) {
-					items.add(new VoteListItem(votes.get(i)));
+		items.add(new SectionListItem("My Votes"));
+		Collection<Vote> votes = this.modelManager.getMyVotes();
+		if (votes.size() == 0) {
+			items.add(new EmptyListItem("You have no own votes, but you can create one. Just press this item."));
+		} else {
+			// add top 5 votes
+			int i = 5;
+			for (Vote v : votes) {
+				items.add(new VoteListItem(v));
+				if (--i <= 0) {
+					break;
 				}
 			}
-		} catch (Exception e) {
-			// something went wrong on server
-			return null;
 		}
-
-		// TODO: remove
-		// VoteListAdapter adapter = new VoteListAdapter(this,
-		// R.layout.vote_list_item, votes);
-		// this.lstCategories.setAdapter(adapter);
 
 		// pending votes
 		items.add(new SectionListItem("Pending Votes"));
 		this.mPendingVotesIndex = items.size() - 1;
-		items.add(new EmptyListItem("No pending votes or invitations."));
+		votes = this.modelManager.getPendingVotes();
+		if (votes.size() == 0) {
+			items.add(new EmptyListItem("No pending votes or invitations."));
+		} else {
+			// add top 5 votes
+			int i = 5;
+			for (Vote v : votes) {
+				items.add(new VoteListItem(v));
+				if (--i <= 0) {
+					break;
+				}
+			}
+		}
 
 		// top public votes
 		items.add(new SectionListItem("Top Votes"));
 		this.mPublicVotesIndex = items.size() - 1;
-		items.add(new EmptyListItem("No available public votes."));
+		votes = this.modelManager.getTopVotes();
+		if (votes.size() == 0) {
+			items.add(new EmptyListItem("No available public votes."));
+		} else {
+			// add top 5 votes
+			int i = 5;
+			for (Vote v : votes) {
+				items.add(new VoteListItem(v));
+				if (--i <= 0) {
+					break;
+				}
+			}
+		}
 
-		return items;
+		SectionListAdapter adapter = new SectionListAdapter(this, R.layout.header_list_item, R.layout.empty_list_item,
+				R.layout.vote_list_item, items);
+		this.lstCategories.setAdapter(adapter);
+		this._isLoading = false;
+	}
+
+	private void loadVotesSync() {
+		// load data
+		try {
+			this.modelManager.loadUsers();
+			this.modelManager.loadVotes();
+
+		} catch (Exception e) {
+			// something went wrong on server
+			// TODO: show error toast
+			e.printStackTrace();
+		}
 	}
 
 	public boolean onOptionsItemSelected(MenuItem item) {

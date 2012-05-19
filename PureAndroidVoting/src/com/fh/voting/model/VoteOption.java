@@ -1,5 +1,7 @@
 package com.fh.voting.model;
 
-public class VoteOption {
+import com.fh.voting.db.DataTransferObject;
+
+public class VoteOption extends DataTransferObject {
 
 }

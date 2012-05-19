@@ -14,14 +14,14 @@
 
         <LinearLayout
             android:id="@+id/layout_votes_content"
-			android:layout_alignParentTop="true"
-			android:layout_width="fill_parent"
-			android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
             android:layout_weight="0.1"
+            android:background="@drawable/transparent_bg"
             android:orientation="vertical"
             android:paddingLeft="6dp"
-            android:paddingRight="4dp"
-            android:background="@drawable/transparent_bg" >
+            android:paddingRight="4dp" >
 
             <TextView
                 android:id="@+id/textView1"
@@ -31,19 +31,18 @@
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <EditText
-                android:id="@+id/editText1"
+                android:id="@+id/txtTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="5dip"
                 android:hint="@string/short_vote_title"
-                android:singleLine="true" 
-                android:layout_marginBottom="5dip"/>
+                android:singleLine="true" />
 
-            <View 
-                android:background="@drawable/separator_gradient"
+            <View
                 android:layout_width="fill_parent"
-                android:layout_height="1dip"/>   
-            
-            
+                android:layout_height="1dip"
+                android:background="@drawable/separator_gradient" />
+
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
@@ -53,66 +52,27 @@
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <EditText
-                android:id="@+id/editText2"
+                android:id="@+id/txtDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="5dip"
                 android:gravity="top"
                 android:hint="@string/detailed_description_of_vote"
                 android:inputType="textMultiLine"
-                android:lines="2"
-                android:layout_marginBottom="5dip" />
+                android:lines="2" />
 
-            <View 
-                android:background="@drawable/separator_gradient"
+            <View
                 android:layout_width="fill_parent"
-                android:layout_height="1dip"/>   
-            
-            
+                android:layout_height="1dip"
+                android:background="@drawable/separator_gradient" />
+
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="@string/public_or_private"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                />
-
-            <RadioGroup
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingLeft="16dp"
-                android:layout_marginBottom="5dip" >
-
-                <RadioButton
-                    android:id="@+id/radioButton1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="20dip"
-                    android:checked="true"
-                    android:text="@string/public_string" />
-
-                <RadioButton
-                    android:id="@+id/radioButton2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/private_string" />
-
-            </RadioGroup>
-            
-            <View 
-                android:background="@drawable/separator_gradient"
-                android:layout_width="fill_parent"
-                android:layout_height="1dip"/>   
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/single_or_multichoice"
-                android:textAppearance="?android:attr/textAppearanceMedium" 
-                android:layout_marginTop="5dip"
-                />
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <RadioGroup
                 android:layout_width="match_parent"
@@ -122,7 +82,42 @@
                 android:paddingLeft="16dp" >
 
                 <RadioButton
-                    android:id="@+id/RadioButton02"
+                    android:id="@+id/rbIsPublic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dip"
+                    android:checked="true"
+                    android:text="@string/public_string" />
+
+                <RadioButton
+                    android:id="@+id/rbIsPrivate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/private_string" />
+            </RadioGroup>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="@drawable/separator_gradient" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dip"
+                android:text="@string/single_or_multichoice"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dip"
+                android:orientation="horizontal"
+                android:paddingLeft="16dp" >
+
+                <RadioButton
+                    android:id="@+id/rbIsSingleChoice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="20dip"
@@ -130,23 +125,23 @@
                     android:text="@string/single" />
 
                 <RadioButton
-                    android:id="@+id/RadioButton01"
+                    android:id="@+id/rbIsMultiChoice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/multichoice" />
             </RadioGroup>
-            
-            <View 
-                android:background="@drawable/separator_gradient"
-                android:layout_width="fill_parent"
-                android:layout_height="1dip"/>   
 
-            <RelativeLayout 
-                android:layout_height="wrap_content"
+            <View
                 android:layout_width="fill_parent"
-                android:layout_marginTop="5dip"
-                android:layout_marginBottom="5dip">
-                
+                android:layout_height="1dip"
+                android:background="@drawable/separator_gradient" />
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dip"
+                android:layout_marginTop="5dip" >
+
                 <TextView
                     android:id="@+id/textView7"
                     android:layout_width="wrap_content"
@@ -162,28 +157,27 @@
                     android:layout_below="@id/textView7"
                     android:text="@string/dates_are_not_set_yet"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
-                
-                <ImageView 
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:src="@drawable/balloon_overlay_close"
-                    android:layout_centerVertical="true"
-                    android:paddingRight="3dip"/>
-                
-            </RelativeLayout> 
 
-            <View 
-                android:background="@drawable/separator_gradient"
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:paddingRight="3dip"
+                    android:src="@drawable/balloon_overlay_close" />
+            </RelativeLayout>
+
+            <View
                 android:layout_width="fill_parent"
-                android:layout_height="1dip"/>   
-                
-            <RelativeLayout 
+                android:layout_height="1dip"
+                android:background="@drawable/separator_gradient" />
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_width="fill_parent"
-                android:layout_marginTop="5dip"
-                android:layout_marginBottom="5dip">
-                
+                android:layout_marginBottom="5dip"
+                android:layout_marginTop="5dip" >
+
                 <TextView
                     android:id="@+id/textView9"
                     android:layout_width="wrap_content"
@@ -199,28 +193,27 @@
                     android:layout_below="@id/textView9"
                     android:text="@string/dates_are_not_set_yet"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
-                
-                <ImageView 
-                    android:layout_height="wrap_content"
+
+                <ImageView
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:src="@drawable/balloon_overlay_close"
                     android:layout_centerVertical="true"
-                    android:paddingRight="3dip"/>
-                
-            </RelativeLayout>    
-            
-            <View 
-                android:background="@drawable/separator_gradient"
+                    android:paddingRight="3dip"
+                    android:src="@drawable/balloon_overlay_close" />
+            </RelativeLayout>
+
+            <View
                 android:layout_width="fill_parent"
-                android:layout_height="1dip"/>   
-                
-            <RelativeLayout 
+                android:layout_height="1dip"
+                android:background="@drawable/separator_gradient" />
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_width="fill_parent"
-                android:layout_marginTop="5dip"
-                android:layout_marginBottom="5dip">
-                
+                android:layout_marginBottom="5dip"
+                android:layout_marginTop="5dip" >
+
                 <TextView
                     android:id="@+id/textView11"
                     android:layout_width="wrap_content"
@@ -236,44 +229,45 @@
                     android:layout_below="@id/textView11"
                     android:text="@string/dates_are_not_set_yet"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
-                
-                <ImageView 
-                    android:layout_height="wrap_content"
+
+                <ImageView
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:src="@drawable/balloon_overlay_close"
                     android:layout_centerVertical="true"
-                    android:paddingRight="3dip"/>
-                
-            </RelativeLayout>    
-            
-            
+                    android:paddingRight="3dip"
+                    android:src="@drawable/balloon_overlay_close" />
+            </RelativeLayout>
         </LinearLayout>
 
         <LinearLayout
-            android:layout_alignParentBottom="true"
-            android:layout_below="@id/layout_votes_content"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@id/layout_votes_content"
             android:gravity="center"
             android:orientation="horizontal"
-			android:padding="7dip">
+            android:padding="7dip" >
 
             <Button
+                android:id="@+id/btnSubmit"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="7dip"
+                android:layout_weight="1"
+                android:background="@drawable/selector_green_btn"
+                android:onClick="onSubmit"
+                android:text="@string/create"
+                android:textColor="@android:color/white" />
+
+            <Button
+                android:id="@+id/btnCancell"
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/accept" 
-                android:textColor="@android:color/white"
                 android:background="@drawable/selector_green_btn"
-                android:layout_marginRight="7dip"/>
-
-            <Button
-                android:layout_width="0dip"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/refuse"
-                android:background="@drawable/selector_green_btn"
+                android:onClick="onCancel"
+                android:text="@string/cancel"
                 android:textColor="@android:color/white" />
         </LinearLayout>
     </RelativeLayout>
