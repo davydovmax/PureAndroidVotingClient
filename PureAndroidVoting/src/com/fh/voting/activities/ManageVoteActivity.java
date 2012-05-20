@@ -13,6 +13,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.util.SparseBooleanArray;
@@ -511,8 +512,26 @@ public class ManageVoteActivity extends DatabaseWrapperActivity {
 		return null;
 	}
 
+	private void forwardActivity(Class<?> cls, Bundle bundle) {
+		Intent intent = new Intent(ManageVoteActivity.this, cls);
+		if (bundle != null) {
+			intent.putExtras(bundle);
+		}
+		startActivity(intent);
+
+		// remove me from history
+		this.finish();
+	}
+
 	private void loadVote() {
 		this.m_vote = this.modelManager.getVote(this.m_voteId);
+
+		// redirect
+		if (this.m_vote.getStatus() != Vote.Status.New) {
+			Bundle bundle = new Bundle();
+			bundle.putInt(Constants.bundle_vote_id, this.m_vote.getId());
+			this.forwardActivity(VoteOverview.class, bundle);
+		}
 
 		this.txtTitle.setText(this.m_vote.getTitle());
 		this.txtDescription.setText(this.m_vote.getText());

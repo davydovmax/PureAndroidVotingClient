@@ -10,7 +10,6 @@
     <uses-sdk android:minSdkVersion="10" />
 
     <application
-        android:name="com.fh.voting.VotingApplication"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/custom_theme" >
@@ -40,6 +39,8 @@
         <activity android:name=".activities.ManageVoteActivity" >
         </activity>
         <activity android:name=".activities.PerformVoteActivity" >
+        </activity>
+        <activity android:name=".activities.VoteOverview" >
         </activity>
     </application>
 

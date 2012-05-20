@@ -193,7 +193,6 @@ public class HomeActivity extends DatabaseWrapperActivity {
 				return null;
 			}
 
-			@SuppressWarnings("unchecked")
 			@Override
 			public void onCompleteCallback(Object result) {
 				homeActivity.onLoadVotes();

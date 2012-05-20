@@ -53,32 +53,37 @@ public class ModelManager {
 	}
 
 	public void loadPendingVotes() throws Exception {
-		// // load votes created by user
-		// ArrayList<Vote> votes = this.m_server.getPendingVotes();
-		// for (int i = 0; i < votes.size(); ++i) {
-		// Vote vote = votes.get(i);
-		//
-		// // store to DB
-		// m_dbHelper.syncItem(vote);
-		// }
-	}
-
-	public void loadTopVotes() throws Exception {
 		// load votes created by user
-		ArrayList<Vote> votes = this.m_server.getTopVotes();
+		ArrayList<Vote> votes = this.m_server.getPendingVotes();
+		ArrayList<Integer> lookup = new ArrayList<Integer>();
 		for (int i = 0; i < votes.size(); ++i) {
 			Vote vote = votes.get(i);
 
 			// store to DB
 			m_dbHelper.syncItem(vote);
+			lookup.add(vote.getId());
 		}
+
+		VoteLookup voteLookup = m_dbHelper.getVoteLookup();
+		voteLookup.setPendingVotes(lookup);
+		m_dbHelper.saveVoteLookup(voteLookup);
 	}
 
-	public void loadVote(int voteId) throws Exception {
-		// vote
-		// vote options
-		// vote invitations
-		//
+	public void loadTopVotes() throws Exception {
+		// load votes created by user
+		ArrayList<Vote> votes = this.m_server.getTopVotes();
+		ArrayList<Integer> lookup = new ArrayList<Integer>();
+		for (int i = 0; i < votes.size(); ++i) {
+			Vote vote = votes.get(i);
+
+			// store to DB
+			m_dbHelper.syncItem(vote);
+			lookup.add(vote.getId());
+		}
+
+		VoteLookup voteLookup = m_dbHelper.getVoteLookup();
+		voteLookup.setTopVotes(lookup);
+		m_dbHelper.saveVoteLookup(voteLookup);
 	}
 
 	public List<Vote> getMyVotes() {
@@ -90,7 +95,13 @@ public class ModelManager {
 	}
 
 	public List<Vote> getPendingVotes() {
-		return this.m_dbHelper.get_pendingVotes(this.getMyUser());
+		ArrayList<Vote> result = new ArrayList<Vote>();
+		VoteLookup voteLookup = m_dbHelper.getVoteLookup();
+		for (Integer id : voteLookup.getPendingVotes()) {
+			result.add((Vote) m_dbHelper.getById(Vote.class, id));
+		}
+
+		return result;
 	}
 
 	public List<User> getUsers() {
@@ -163,5 +174,22 @@ public class ModelManager {
 
 	public ArrayList<VoteOption> getOptions(Vote vote) throws Exception {
 		return this.m_server.getOptions(vote.getId());
+	}
+
+	public void performVote(Vote vote, ArrayList<VoteOption> options) throws Exception {
+		ArrayList<Integer> optionIds = new ArrayList<Integer>();
+		for (VoteOption option : options) {
+			optionIds.add(option.getId());
+		}
+
+		this.m_server.performVote(vote.getId(), optionIds);
+	}
+
+	public ArrayList<VoteChoice> getMyChoices(Vote vote) throws Exception {
+		return this.m_server.getMyChoices(vote.getId());
+	}
+
+	public VoteResult getVoteResult(Vote vote) throws Exception {
+		return this.m_server.getVoteResult(vote.getId());
 	}
 }

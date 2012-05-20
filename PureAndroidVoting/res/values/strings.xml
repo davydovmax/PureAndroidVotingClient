@@ -38,6 +38,7 @@
     <string name="my_votes">My Votes</string>
     <string name="top_votes_activity">Top Public Votes</string>
     <string name="do_vote_activity">Please Vote!</string>
+    <string name="vote_overview_activity">Vote Overview</string>
     <string name="start_date">Start Date:</string>
     <string name="vote_duration_setting">Vote duration, hours:</string>
     <string name="_empty_">_empty_</string>
@@ -47,6 +48,7 @@
     <string name="button_save">Save</string>
     <string name="button_delete">Delete</string>
     <string name="button_vote">Vote!</string>
+    <string name="button_participate">Participate in Vote</string>
     <string name="every_vote_counts">Every Vote Counts!</string>
     <string name="vote_option_text_view">Option text:</string>
     <string name="vote_option_text_hint">Option text</string>

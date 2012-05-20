@@ -103,7 +103,22 @@ public class Vote extends DataTransferObject {
 	}
 
 	public Status getStatus() {
-		return status;
+		// HACK:
+		// TODO: never fix
+		Date current = Calendar.getInstance().getTime();
+		if (status == Vote.Status.New) {
+			return Vote.Status.New;
+		}
+
+		if (current.before(this.startDate)) {
+			return Vote.Status.Public;
+		}
+
+		if (current.after(this.startDate) && current.before(this.endDate)) {
+			return Vote.Status.Started;
+		}
+
+		return Vote.Status.Ended;
 	}
 
 	public void setStatus(Status status) {

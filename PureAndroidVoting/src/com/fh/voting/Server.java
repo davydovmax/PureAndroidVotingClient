@@ -24,12 +24,16 @@ import android.util.Log;
 
 import com.fh.voting.model.User;
 import com.fh.voting.model.Vote;
+import com.fh.voting.model.VoteChoice;
 import com.fh.voting.model.VoteInvitation;
 import com.fh.voting.model.VoteOption;
+import com.fh.voting.model.VoteResult;
+import com.fh.voting.parsers.ChoiceParser;
 import com.fh.voting.parsers.DateTimeConverter;
 import com.fh.voting.parsers.InvitationParser;
 import com.fh.voting.parsers.OptionParser;
 import com.fh.voting.parsers.UsersParser;
+import com.fh.voting.parsers.VoteResultParser;
 import com.fh.voting.parsers.VotesParser;
 
 public class Server {
@@ -197,5 +201,35 @@ public class Server {
 		String response = this.performGET(requestString);
 		OptionParser parser = new OptionParser();
 		return parser.parseVoteOptions(response);
+	}
+
+	public void performVote(int id, ArrayList<Integer> optionIds) throws Exception {
+		String requestString = String.format("%s/%s/votes/%d/vote?options=", this.server, this.phoneId, id);
+		for (Integer optionId : optionIds) {
+			requestString += optionId.toString() + ",";
+		}
+		this.performPUT(requestString);
+
+	}
+
+	public ArrayList<VoteChoice> getMyChoices(int voteId) throws Exception {
+		String requestString = String.format("%s/%s/votes/%d/my_choices", this.server, this.phoneId, voteId);
+		String response = this.performGET(requestString);
+		ChoiceParser parser = new ChoiceParser();
+		return parser.parseVoteChoices(response);
+	}
+
+	public ArrayList<Vote> getPendingVotes() throws Exception {
+		String requestString = String.format("%s/%s/pending", this.server, this.phoneId);
+		String response = this.performGET(requestString);
+		VotesParser parser = new VotesParser();
+		return parser.parseVotes(response);
+	}
+
+	public VoteResult getVoteResult(int voteId) throws Exception {
+		String requestString = String.format("%s/%s/votes/%d/result", this.server, this.phoneId, voteId);
+		String response = this.performGET(requestString);
+		VoteResultParser parser = new VoteResultParser();
+		return parser.parseVoteResult(response);
 	}
 }

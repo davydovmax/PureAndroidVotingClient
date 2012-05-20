@@ -14,6 +14,7 @@ import com.db4o.ObjectSet;
 import com.db4o.query.Predicate;
 import com.fh.voting.model.User;
 import com.fh.voting.model.Vote;
+import com.fh.voting.model.VoteLookup;
 
 public class DatabaseHelper {
 	private static ObjectContainer oc = null;
@@ -111,13 +112,6 @@ public class DatabaseHelper {
 		return result;
 	}
 
-	public List<Vote> get_pendingVotes(User m_user) {
-		List<Vote> result = new ArrayList<Vote>();
-
-		// TODO: load votes
-		return result;
-	}
-
 	@SuppressWarnings("serial")
 	public User getUser(String phoneId) {
 		final String id = phoneId;
@@ -143,5 +137,18 @@ public class DatabaseHelper {
 
 	public List<User> getUsers() {
 		return db().query(User.class);
+	}
+
+	public VoteLookup getVoteLookup() {
+		ObjectSet<VoteLookup> items = db().query(VoteLookup.class);
+		if (items.hasNext())
+			return items.next();
+		else
+			return new VoteLookup();
+	}
+
+	public void saveVoteLookup(VoteLookup lookup) {
+		db().store(lookup);
+		db().commit();
 	}
 }
