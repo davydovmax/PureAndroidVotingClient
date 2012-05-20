@@ -101,6 +101,11 @@ public class DatabaseHelper {
 				continue;
 			}
 
+			// filter private votes
+			if (vote.getIsPrivate()) {
+				continue;
+			}
+
 			// filter not public and ended votes
 			if (vote.getStatus() != Vote.Status.Public && vote.getStatus() != Vote.Status.Started) {
 				continue;
