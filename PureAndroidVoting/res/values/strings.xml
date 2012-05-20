@@ -37,6 +37,7 @@
     <string name="manage_vote">Manage Vote</string>
     <string name="my_votes">My Votes</string>
     <string name="top_votes_activity">Top Public Votes</string>
+    <string name="pending_votes_activity">Pending Votes</string>
     <string name="do_vote_activity">Please Vote!</string>
     <string name="vote_overview_activity">Vote Overview</string>
     <string name="start_date">Start Date:</string>

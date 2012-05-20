@@ -28,7 +28,7 @@ public class PendingVotesActivity extends DatabaseWrapperActivity {
 		setContentView(R.layout.public_votes);
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.title);
 		TextView titleText = (TextView) findViewById(R.id.title_text);
-		titleText.setText(R.string.top_votes_activity);
+		titleText.setText(R.string.pending_votes_activity);
 
 		Window window = getWindow();
 		window.setFormat(PixelFormat.RGBA_8888);
