@@ -8,7 +8,6 @@
     <string name="no_invitations_yet">(no users invited so far…)</string>
     <string name="vote_dates">Vote Dates…</string>
     <string name="invited_users">Invited users:</string>
-    <string name="_no_vote_options_yet_">(no vote options yet)</string>
     <string name="no_vote_options_yet">(no vote options yet)</string>
     <string name="vote_options">Vote Options…</string>
     <string name="multichoice">Multichoice</string>
@@ -31,12 +30,26 @@
     <string name="cancel">Cancel</string>
     <string name="registration">Registration</string>
     <string name="create_vote">Create Vote</string>
+    <string name="select">Select</string>
+    <string name="save_vote">Save Vote</string>
+    <string name="publish_vote">Save and Publish</string>
     <string name="create">Create</string>
     <string name="manage_vote">Manage Vote</string>
     <string name="my_votes">My Votes</string>
+    <string name="top_votes_activity">Top Public Votes</string>
+    <string name="do_vote_activity">Please Vote!</string>
     <string name="start_date">Start Date:</string>
     <string name="vote_duration_setting">Vote duration, hours:</string>
     <string name="_empty_">_empty_</string>
+    <string name="vote_options_button">Vote options:</string>
     <string name="duration_initial_value">0 h</string>
+    <string name="button_add">Add</string>
+    <string name="button_save">Save</string>
+    <string name="button_delete">Delete</string>
+    <string name="button_vote">Vote!</string>
+    <string name="every_vote_counts">Every Vote Counts!</string>
+    <string name="vote_option_text_view">Option text:</string>
+    <string name="vote_option_text_hint">Option text</string>
+    <string name="edit_vote_option_dialog">Edit Vote option</string>
 
 </resources>

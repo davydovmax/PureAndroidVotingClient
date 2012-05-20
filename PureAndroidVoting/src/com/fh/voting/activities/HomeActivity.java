@@ -95,7 +95,7 @@ public class HomeActivity extends DatabaseWrapperActivity {
 			}
 
 			// other sections clicked, open if there are votes
-			EmptyListItem nextItem = (EmptyListItem) this.lstCategories.getItemAtPosition(position + 1);
+			IListItem nextItem = (IListItem) this.lstCategories.getItemAtPosition(position + 1);
 			if (!(nextItem instanceof EmptyListItem)) {
 				if (position == this.mPendingVotesIndex) {
 					this.openActivity(PendingVotesActivity.class);
@@ -126,11 +126,9 @@ public class HomeActivity extends DatabaseWrapperActivity {
 			bundle.putInt(Constants.bundle_vote_id, voteItem.getVote().getId());
 
 			if (position < this.mPendingVotesIndex) {
-				// TODO: pass vote ID
 				// manage my Vote
 				this.openActivity(ManageVoteActivity.class, bundle);
 			} else {
-				// TODO: pass vote ID
 				// perform Vote
 				this.openActivity(PerformVoteActivity.class, bundle);
 			}

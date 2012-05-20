@@ -211,10 +211,68 @@
                     android:background="@drawable/separator_gradient" />
 
                 <RelativeLayout
+                    android:id="@+id/layoutOptionsButton"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dip"
-                    android:layout_marginTop="5dip" >
+                    android:layout_marginTop="5dip"
+                    android:clickable="true" >
+
+                    <TextView
+                        android:id="@+id/textView55"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:text="@string/vote_options_button"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <TextView
+                        android:id="@+id/txtVoteOptions"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/textView55"
+                        android:text="@string/no_vote_options_yet"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                    <ImageView
+                        android:id="@+id/imageView1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:contentDescription="@string/_empty_"
+                        android:paddingRight="3dip"
+                        android:src="@drawable/balloon_overlay_close" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignTop="@+id/imageView1"
+                        android:layout_marginLeft="37dp"
+                        android:orientation="vertical" >
+                    </LinearLayout>
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dip"
+                    android:layout_marginTop="5dip"
+                    android:background="@drawable/separator_gradient" />
+
+                <RelativeLayout
+                    android:id="@+id/layoutUsers"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dip"
+                    android:layout_marginTop="5dip"
+                    android:clickable="true" >
 
                     <TextView
                         android:id="@+id/textView11"
@@ -225,7 +283,7 @@
                         android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     <TextView
-                        android:id="@+id/textView12"
+                        android:id="@+id/txtInvitedUsers"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/textView11"
@@ -281,13 +339,13 @@
                 android:textColor="@android:color/white" />
 
             <Button
-                android:id="@+id/btnCancell"
+                android:id="@+id/btnPublish"
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/selector_green_btn"
-                android:onClick="onCancel"
-                android:text="@string/cancel"
+                android:onClick="onPublish"
+                android:text="@string/publish_vote"
                 android:textColor="@android:color/white" />
         </LinearLayout>
     </RelativeLayout>

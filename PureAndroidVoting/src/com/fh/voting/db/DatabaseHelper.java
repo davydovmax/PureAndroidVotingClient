@@ -58,6 +58,7 @@ public class DatabaseHelper {
 		new File(db4oDBFullPath(context)).delete();
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void syncItem(DataTransferObject obj) throws Exception {
 		// check id
 		if (obj.id == 0) {
@@ -67,12 +68,13 @@ public class DatabaseHelper {
 		// kill old item(s)
 		Class cls = obj.getClass();
 		ObjectSet<DataTransferObject> result = db().query(cls);
-		if (result.hasNext()) {
+		while (result.hasNext()) {
 			DataTransferObject old = result.next();
 			if (old.getId() == obj.getId()) {
 				db().delete(old);
 			}
 		}
+		db().commit();
 
 		// store new item
 		db().store(obj);
@@ -99,7 +101,7 @@ public class DatabaseHelper {
 			}
 
 			// filter not public and ended votes
-			if (vote.getStatus() != Vote.Status.Public || vote.getStatus() != Vote.Status.Started) {
+			if (vote.getStatus() != Vote.Status.Public && vote.getStatus() != Vote.Status.Started) {
 				continue;
 			}
 
@@ -116,6 +118,7 @@ public class DatabaseHelper {
 		return result;
 	}
 
+	@SuppressWarnings("serial")
 	public User getUser(String phoneId) {
 		final String id = phoneId;
 		return db().query(new Predicate<User>() {
@@ -125,6 +128,7 @@ public class DatabaseHelper {
 		}).next();
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public DataTransferObject getById(Class cls, int id) {
 		ObjectSet<DataTransferObject> items = db().query(cls);
 		while (items.hasNext()) {
@@ -135,5 +139,9 @@ public class DatabaseHelper {
 		}
 
 		return null;
+	}
+
+	public List<User> getUsers() {
+		return db().query(User.class);
 	}
 }

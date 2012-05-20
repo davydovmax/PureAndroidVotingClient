@@ -93,6 +93,10 @@ public class ModelManager {
 		return this.m_dbHelper.get_pendingVotes(this.getMyUser());
 	}
 
+	public List<User> getUsers() {
+		return this.m_dbHelper.getUsers();
+	}
+
 	public User getMyUser() {
 		if (this._user == null) {
 			this._user = this.m_dbHelper.getUser(this.m_phoneId);
@@ -114,5 +118,50 @@ public class ModelManager {
 		this.m_dbHelper.syncItem(vote);
 
 		return vote;
+	}
+
+	public Vote updateVote(Vote vote, String title, String text, boolean isPrivate, boolean isMultiChoice,
+			Date startDate, Date endDate) throws Exception {
+		Vote updatedVote = this.m_server.updateVote(vote.getId(), title, text, this.getMyUser().getId(), isPrivate,
+				isMultiChoice, startDate, endDate);
+
+		// store to DB
+		this.m_dbHelper.syncItem(updatedVote);
+
+		return updatedVote;
+	}
+
+	public Vote publishVote(Vote vote) throws Exception {
+		Vote updatedVote = this.m_server.publishVote(vote.getId());
+		this.m_dbHelper.syncItem(updatedVote);
+
+		return updatedVote;
+	}
+
+	public void inviteUsers(Vote vote, ArrayList<User> invited) throws Exception {
+		ArrayList<Integer> userIds = new ArrayList<Integer>();
+		for (User user : invited) {
+			userIds.add(user.getId());
+		}
+
+		this.m_server.setInvitations(vote.getId(), userIds);
+
+		// TODO: sync invitations to DB
+		// this.m_dbHelper.syncItem(updatedVote);
+	}
+
+	public ArrayList<VoteInvitation> getInvitations(Vote vote) throws Exception {
+		return this.m_server.getInvitations(vote.getId());
+	}
+
+	public void setVoteOptions(Vote vote, ArrayList<String> options) throws Exception {
+		this.m_server.setOptions(vote.getId(), options);
+
+		// TODO: sync options to DB
+		// this.m_dbHelper.syncItem(updatedVote);
+	}
+
+	public ArrayList<VoteOption> getOptions(Vote vote) throws Exception {
+		return this.m_server.getOptions(vote.getId());
 	}
 }

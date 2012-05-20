@@ -24,7 +24,11 @@ import android.util.Log;
 
 import com.fh.voting.model.User;
 import com.fh.voting.model.Vote;
+import com.fh.voting.model.VoteInvitation;
+import com.fh.voting.model.VoteOption;
 import com.fh.voting.parsers.DateTimeConverter;
+import com.fh.voting.parsers.InvitationParser;
+import com.fh.voting.parsers.OptionParser;
 import com.fh.voting.parsers.UsersParser;
 import com.fh.voting.parsers.VotesParser;
 
@@ -135,12 +139,63 @@ public class Server {
 
 	public Vote createVote(String title, String text, int authorId, boolean isPrivate, boolean isMultiChoice,
 			Date startDate, Date endDate) throws Exception {
-		String requestString = String.format("%s/%s/my?title=%s&text=%s&start_date=%s&end_date=%s&", this.server,
+		String requestString = String.format(
+				"%s/%s/my?title=%s&text=%s&start_date=%s&end_date=%s&is_multiple_choice=%d&is_private=%d", this.server,
 				this.phoneId, URLEncoder.encode(title), URLEncoder.encode(text),
 				URLEncoder.encode(DateTimeConverter.toString(startDate)),
-				URLEncoder.encode(DateTimeConverter.toString(endDate)));
+				URLEncoder.encode(DateTimeConverter.toString(endDate)), isMultiChoice ? 1 : 0, isPrivate ? 1 : 0);
 		String response = this.performPUT(requestString);
 		VotesParser parser = new VotesParser();
 		return parser.parseVote(response);
+	}
+
+	public Vote updateVote(int id, String title, String text, int id2, boolean isPrivate, boolean isMultiChoice,
+			Date startDate, Date endDate) throws Exception {
+		String requestString = String.format(
+				"%s/%s/my/%d?title=%s&text=%s&start_date=%s&end_date=%s&is_multiple_choice=%d&is_private=%d",
+				this.server, this.phoneId, id, URLEncoder.encode(title), URLEncoder.encode(text),
+				URLEncoder.encode(DateTimeConverter.toString(startDate)),
+				URLEncoder.encode(DateTimeConverter.toString(endDate)), isMultiChoice ? 1 : 0, isPrivate ? 1 : 0);
+		String response = this.performPUT(requestString);
+		VotesParser parser = new VotesParser();
+		return parser.parseVote(response);
+	}
+
+	public Vote publishVote(int id) throws Exception {
+		String requestString = String.format("%s/%s/my/%d/publish", this.server, this.phoneId, id);
+		String response = this.performPUT(requestString);
+		VotesParser parser = new VotesParser();
+		return parser.parseVote(response);
+	}
+
+	public void setInvitations(int id, ArrayList<Integer> userIds) throws Exception {
+		String requestString = String.format("%s/%s/my/%d/invitations?users=", this.server, this.phoneId, id);
+		for (Integer userId : userIds) {
+			requestString += userId.toString() + ",";
+		}
+		this.performPUT(requestString);
+	}
+
+	public ArrayList<VoteInvitation> getInvitations(int voteId) throws Exception {
+		String requestString = String.format("%s/%s/votes/%d/invitations", this.server, this.phoneId, voteId);
+		String response = this.performGET(requestString);
+		InvitationParser parser = new InvitationParser();
+		return parser.parseVoteInvitations(response);
+	}
+
+	public void setOptions(int id, ArrayList<String> options) throws Exception {
+		String requestString = String.format("%s/%s/my/%d/options?options=", this.server, this.phoneId, id);
+		String optionsString = "";
+		for (String option : options) {
+			optionsString += option.toString() + ",";
+		}
+		this.performPUT(requestString + URLEncoder.encode(optionsString));
+	}
+
+	public ArrayList<VoteOption> getOptions(int voteId) throws Exception {
+		String requestString = String.format("%s/%s/votes/%d/options", this.server, this.phoneId, voteId);
+		String response = this.performGET(requestString);
+		OptionParser parser = new OptionParser();
+		return parser.parseVoteOptions(response);
 	}
 }

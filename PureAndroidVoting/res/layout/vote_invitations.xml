@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/radialback"
+    android:orientation="vertical" >
+
+    <ListView
+        android:id="@+id/lstUsers"
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="0.01"
+        android:cacheColorHint="#00000000" >
+    </ListView>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:background="@drawable/separator_gradient" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="7dip" >
+
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="7dip"
+            android:background="@drawable/selector_green_btn"
+            android:text="@string/select"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+</LinearLayout>

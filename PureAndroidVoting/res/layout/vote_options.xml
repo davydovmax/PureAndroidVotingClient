@@ -3,15 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/radialback"
-    android:orientation="vertical"
-    android:paddingLeft="4dip" >
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/every_vote_counts"
-        android:textSize="12sp"
-        android:textStyle="italic" />
+    android:orientation="vertical" >
 
     <ListView
         android:id="@+id/lstOptions"
@@ -34,13 +26,23 @@
         android:padding="7dip" >
 
         <Button
-            android:id="@+id/btnSubmit"
-            android:layout_width="match_parent"
+            android:id="@+id/btnSave"
+            android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_marginRight="7dip"
+            android:layout_weight="0.1"
             android:background="@drawable/selector_green_btn"
-            android:onClick="onSubmit"
-            android:text="@string/button_vote"
+            android:text="@string/button_save"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/btnAdd"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="7dip"
+            android:layout_weight="0.1"
+            android:background="@drawable/selector_green_btn"
+            android:text="@string/button_add"
             android:textColor="@android:color/white" />
     </LinearLayout>
 
